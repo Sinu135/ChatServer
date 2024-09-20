@@ -5,13 +5,14 @@ start() ->
     {ok, ListenSocket} = gen_tcp:listen(1234, [binary, {packet, 0}, {active, false}, {reuseaddr, true}]),
     io:format("Chat server started on port 1234~n"),
     chat_clients:start(),
+    chat_supervisor:start_link(), %% Inicia el supervisor
     accept(ListenSocket).
 
 accept(ListenSocket) ->
     {ok, Socket} = gen_tcp:accept(ListenSocket),
     chat_clients:add_client(Socket),  % Agrega el cliente al gestor
     io:format("Client connected~n"),
-    spawn(fun() -> handle_message(Socket) end),
+    chat_supervisor:start_child(Socket),  %% Ahora usa el supervisor para iniciar el manejador
     accept(ListenSocket).
 
 handle_message(Socket) ->
