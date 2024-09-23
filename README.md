@@ -1,5 +1,11 @@
 # Chat Server
 
+## Integrantes
+
+- Morales Calvo José Luis - 21212001
+- Van Pratt González Ricardo Adolfo - 21212581
+- Velázquez Durán Sinuhe de Jesús - 21212060
+
 ## Asciinema
 
 ### Compilar y ejecutar servidor
